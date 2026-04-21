@@ -1,0 +1,520 @@
+/* Purple Admin Theme - Inspired by Bootstrap Dash Purple */
+:root {
+  --purple-primary: #7b1fa2;
+  --purple-light: #9c4dcc;
+  --purple-dark: #4a0072;
+  --purple-gradient: linear-gradient(to right, #da8cff, #9a55ff);
+  --purple-gradient-hover: linear-gradient(to right, #c87cef, #8a45ef);
+  --sidebar-bg: #1c1a3e;
+  --sidebar-text: #a9a7c1;
+  --sidebar-active-bg: rgba(255, 255, 255, 0.1);
+  --sidebar-active-text: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.05);
+  --sidebar-width: 260px;
+  --navbar-height: 63px;
+  --content-bg: #f4f5f7;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ===================== BODY & LAYOUT ===================== */
+body { 
+  background-color: var(--content-bg);
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.875rem;
+  color: #343a40;
+}
+
+.page-body-wrapper {
+  display: flex; 
+  min-height: 100vh;
+}
+
+.main-panel {
+  margin-left:  var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s ease;
+}
+
+.content-wrapper {
+  flex: 1;
+  padding: 1.5rem;
+  padding-top: calc(var(--navbar-height) + 1.5rem);
+}
+
+/* ===================== SIDEBAR ===================== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--sidebar-bg);
+  z-index: 100;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: 1px solid var(--sidebar-border);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+
+.sidebar-brand {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--sidebar-border);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar-brand-logo {
+  width: 36px;
+  height: 36px;
+  background: var(--purple-gradient);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.sidebar-brand-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+
+.sidebar-brand-sub {
+  font-size: 0.7rem;
+  color: var(--sidebar-text);
+  display: block;
+}
+
+.sidebar-nav {
+  padding: 1rem 0;
+}
+
+.sidebar-nav-section {
+  padding: 0.5rem 1.5rem 0.25rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(169, 167, 193, 0.5);
+  margin-top: 0.5rem;
+}
+
+.sidebar-nav-item {
+  list-style: none;
+  padding: 0 0.75rem;
+  margin-bottom: 2px;
+}
+
+.sidebar-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  color: var(--sidebar-text) !important;
+  text-decoration: none !important;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.sidebar-nav-link:hover {
+  background: var(--sidebar-active-bg);
+  color: #fff !important;
+}
+
+.sidebar-nav-link.active {
+  background: var(--sidebar-active-bg);
+  color: var(--sidebar-active-text) !important;
+  font-weight: 500;
+}
+
+.sidebar-nav-link .nav-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.sidebar-nav-link .nav-arrow {
+  margin-left: auto;
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+
+.sidebar-nav-item .sub-menu {
+  padding-left: 2.25rem;
+  list-style: none;
+  padding-top: 0.25rem;
+}
+
+.sidebar-nav-item .sub-menu-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  color: var(--sidebar-text) !important;
+  text-decoration: none !important;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  transition: all 0.2s ease;
+}
+
+.sidebar-nav-item .sub-menu-link:hover,
+.sidebar-nav-item .sub-menu-link.active {
+  color: #fff !important;
+  background: var(--sidebar-active-bg);
+}
+
+/* ===================== NAVBAR ===================== */
+.navbar-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: var(--sidebar-width);
+  height: var(--navbar-height);
+  background: #fff;
+  border-bottom: 1px solid #e9ecef;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  transition: left 0.3s ease;
+}
+
+.navbar-top .navbar-brand-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--purple-primary);
+}
+
+.navbar-top .admin-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-top .admin-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--purple-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.navbar-top .admin-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #343a40;
+}
+
+/* ===================== PAGE HEADER ===================== */
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-header h4 {
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: #343a40;
+  margin: 0;
+}
+
+.page-header .breadcrumb {
+  margin: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 0.8rem;
+}
+
+.page-header .breadcrumb-item + .breadcrumb-item::before {
+  content: "›";
+}
+
+/* ===================== CARDS ===================== */
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+}
+
+.card-header {
+  background: transparent;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 1rem 1.25rem;
+}
+
+.card-header h5 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+/* ===================== BUTTONS ===================== */
+.btn-gradient-primary {
+  background: var(--purple-gradient);
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-gradient-primary:hover,
+.btn-gradient-primary:focus {
+  background: var(--purple-gradient-hover);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(154, 85, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-gradient-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline-purple {
+  border-color: var(--purple-primary);
+  color: var(--purple-primary);
+}
+
+.btn-outline-purple:hover {
+  background: var(--purple-primary);
+  color: #fff;
+}
+
+/* ===================== STATS CARDS (DASHBOARD) ===================== */
+.stat-card {
+  border-radius: 10px;
+  border: none;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+}
+
+.stat-card .stat-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.stat-card .stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-card .stat-label {
+  font-size: 0.8125rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* ===================== TABLE STYLES ===================== */
+.table-card .table {
+  margin: 0;
+}
+
+.table-card .table thead th {
+  background: #f8f9fa;
+  border-bottom: 2px solid #e9ecef;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+  padding: 0.75rem 1rem;
+}
+
+.table-card .table tbody td {
+  padding: 0.875rem 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.875rem;
+}
+
+.table-card .table tbody tr:hover {
+  background: rgba(123, 31, 162, 0.02);
+}
+
+.table-card .table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===================== BADGES ===================== */
+.badge-active {
+  background: rgba(40, 167, 69, 0.12);
+  color: #28a745;
+  font-weight: 500;
+  padding: 0.3em 0.75em;
+  border-radius: 20px;
+  font-size: 0.75rem;
+}
+
+.badge-inactive {
+  background: rgba(220, 53, 69, 0.12);
+  color: #dc3545;
+  font-weight: 500;
+  padding: 0.3em 0.75em;
+  border-radius: 20px;
+  font-size: 0.75rem;
+}
+
+/* ===================== FORM STYLES ===================== */
+.form-label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #495057;
+  margin-bottom: 0.4rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--purple-light);
+  box-shadow: 0 0 0 0.2rem rgba(123, 31, 162, 0.15);
+}
+
+.form-control.is-valid:focus,
+.form-select.is-valid:focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.15);
+}
+
+/* ===================== PAGINATION ===================== */
+.pagination .page-link {
+  color: var(--purple-primary);
+  border-color: #dee2e6;
+  font-size: 0.875rem;
+}
+
+.pagination .page-item.active .page-link {
+  background: var(--purple-gradient);
+  border-color: transparent;
+  color: #fff;
+}
+
+.pagination .page-link:focus {
+  box-shadow: 0 0 0 0.2rem rgba(123, 31, 162, 0.15);
+}
+
+/* ===================== LOGIN PAGE ===================== */
+.login-page {
+  min-height: 100vh;
+  background: var(--purple-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.login-card-header {
+  background: var(--sidebar-bg);
+  padding: 2rem;
+  text-align: center;
+  color: #fff;
+}
+
+.login-card-header .brand-logo {
+  width: 56px;
+  height: 56px;
+  background: var(--purple-gradient);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 0 auto 1rem;
+  font-weight: 700;
+}
+
+.login-card-header h4 {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.login-card-header p {
+  color: var(--sidebar-text);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.login-card-body {
+  padding: 2rem;
+  background: #fff;
+}
+
+/* ===================== SEARCH INPUT ===================== */
+.search-input-wrapper {
+  position: relative;
+}
+
+.search-input-wrapper .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #adb5bd;
+  pointer-events: none;
+}
+
+.search-input-wrapper .form-control {
+  padding-left: 2.25rem;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .main-panel {
+    margin-left: 0;
+    width: 100%;
+  }
+  .navbar-top {
+    left: 0;
+  }
+}
